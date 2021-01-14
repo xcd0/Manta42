@@ -8,13 +8,6 @@
 
 * ファームウェアもキーの数を変えてキーマップを好きに変えただけです。
 
-<!---->
-<!--
-
-![](./img/msw58_photo.jpg)
-
-![](./img/msw29_v14_ss_1.png)
-
 3Dプリンタ－で印刷できるように、STLファイルを[./model](./model)に置いています。  
 GithubはSTLファイルそのまま表示できてすごいですね...  
 印刷するときの注意点として、インフィルは100%をお勧めします。  
@@ -26,8 +19,6 @@ fusion360の使い方がいまいちわかっておらず、
 github的なところで完全な状態で共有ができる方法がわからないので、  
 STLファイル以外は置いていません。  
 需要があるかわかりませんが、元データが欲しい場合、[@xcd0](https://twitter.com/xcd0)にご相談ください。  
-
-	-->
 
 ## ファームウェアのビルド方法
 
@@ -43,7 +34,7 @@ git clone https://github.com/qmk/qmk_firmware
 2. `qmk_firmware`と同じ階層にこのリポジトリをクローンします。
 
 ```
-git clone https://github.com/xcd0/42
+git clone https://github.com/xcd0/Manta42
 ```
 
 3. `build.sh`を実行します。  
@@ -53,7 +44,7 @@ cd ~/work/manta42
 ./build.sh
 ```
 
-4. `build.sh`と同じディレクトリに`manta_rev2_default.hex`ができます。
+4. `build.sh`と同じディレクトリに`manta42_rev2_default.hex`ができます。
 あとはこれを書き込むだけです。私は[QMK Toolbox](https://qmk.fm/toolbox/)を使って書き込んでいます。
 
 
