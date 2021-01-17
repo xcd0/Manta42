@@ -64,12 +64,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define MATRIX_ROWS 8
 //#define MATRIX_ROW_PINS { D4, C6, D7, E6 }
 
-#define MATRIX_ROWS 10
-#define MATRIX_ROW_PINS { D4, C6, D7, E6, B4 }
+// 3x7の21キー
+#define MATRIX_ROWS 6
+#define MATRIX_ROW_PINS { D4, C6, D7 } // 4=D4, 5=C6, 6=D7
 
 // wiring of each half
 #define MATRIX_COLS 7
-#define MATRIX_COL_PINS { F4, F5, F6, F7, B1, B3, B2 }
+#define MATRIX_COL_PINS { F4, F5, F6, F7, B1, B3, B2 } // A3=F4, A2=F5, A1=F6, A0=F7, 15=B1, 14=B3, 16=B2, 10=B6
 
 // #define MATRIX_COL_PINS { B2, B3, B1, F7, F6, F5, F4 } //uncomment this line and comment line above if you need to reverse left-to-right key order
 

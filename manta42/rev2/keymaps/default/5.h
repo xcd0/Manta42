@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT( \
       JP_Q,    JP_W,    JP_E,    JP_R,    JP_T,                                          JP_Y,    JP_U,    JP_I,    JP_O,    JP_P,    \
       JP_A,    JP_S,    JP_D,    JP_F,    JP_G,                                          JP_H,    JP_J,    JP_K,    JP_L,    JP_SCLN, \
-      JP_Z,    JP_X,    JP_C,    JP_V,    JP_B,   T_ES_L1, JP_LALT,    T_IN_L3, T_AL_L4, JP_N,    JP_M,    JP_COMM, JP_DOT,  JP_SLSH, \
+      JP_Z,    JP_X,    JP_C,    JP_V,    JP_B,   T_ES_L1, T_TA_L2,    T_IN_L3, T_AL_L4, JP_N,    JP_M,    JP_COMM, JP_DOT,  JP_SLSH, \
                                  T_HO_MH, JP_SPC, L_Q_S,   JP_LCTL,    JP_BSPC, JP_ENT,  JP_DEL,  T_EN_HN \
       ),
   // SHIFTを押してるとき レイヤーを切り替えちゃう

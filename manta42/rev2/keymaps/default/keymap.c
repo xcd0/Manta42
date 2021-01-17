@@ -46,11 +46,11 @@ enum layer_number {
 };
 
 enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  YSTRP,
-  LEFT, RIGHT, SYMBOL, NUM, ADJUST,
-  EISU, KANA,
-  L1,L2,L3,L4,
+	QWERTY = SAFE_RANGE,
+	YSTRP,
+	LEFT, RIGHT, SYMBOL, NUM, ADJUST,
+	EISU, KANA,
+	L1,L2,L3,L4,
 
 	MIDI, MI_UP, MI_DOWN, MI_T_UP, MI_T_DN, MI_NOTEMIN,
 	MI_L01 = MI_NOTEMIN, MI_L02, MI_L03, MI_L04, MI_L05, MI_L06, MI_L07, MI_L08, MI_L09, MI_L10, MI_L11, MI_L12,
@@ -67,6 +67,7 @@ enum macro_keycodes {
 #define M_SAMPLE M(KC_SAMPLEMACRO)
 
 #include "keymap_jp.h"
+
 
 #include "tap_dance.h"
 
@@ -102,6 +103,7 @@ void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
     layer_off(layer3);
   }
 }
+//}}}
 
 // tapとholdで挙動を変えるキーについて 判定の境界時間を初期値TAPPING_TERMから変更する場合ここに記述する
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
@@ -115,8 +117,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 	}
 }
 
-//}}}
-
 // midi のノート番号をいい感じに設定する
 // 81鍵のピアノで一番低い音C1は24 高い音C8は108 真ん中のドC4は60 ラA4は69
 // 初期状態でMI_001を押されたとき C4の60を出力したい ( MI_001 - MI_NOTEMIN = 12 )
@@ -127,62 +127,52 @@ bool midi_tmp_offset_u = 0; // 押している間だけオフセット
 bool midi_tmp_offset_d = 0; // 押している間だけオフセット
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-// 追加したコード {{{
-    case QWERTY:
-      if (record->event.pressed) {
-        persistent_default_layer_set(1UL<<_QWERTY);
-      }
-      return false;
-      break;
-    case YSTRP:
-      if (record->event.pressed) {
-        persistent_default_layer_set(1UL<<_YSTRP);
-      }
-      return false;
-      break;
-    case L1:
-      if (record->event.pressed) {
-          //not sure how to have keyboard check mode and set it to a variable, so my work around
-          //uses another variable that would be set to true after the first time a reactive key is pressed.
-        if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
-        } else {
-          TOG_STATUS = !TOG_STATUS;
-        }
-        layer_on(_LAYER_1);
-        update_tri_layer_RGB(_LAYER_1, _LAYER_2, _ADJUST);
-      } else {
-        TOG_STATUS = false;
-        layer_off(_LAYER_1);
-        update_tri_layer_RGB(_LAYER_1, _LAYER_2, _ADJUST);
-      }
-      return false;
-      break;
-    case L2:
-      if (record->event.pressed) {
-        //not sure how to have keyboard check mode and set it to a variable, so my work around
-        //uses another variable that would be set to true after the first time a reactive key is pressed.
-        if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
-        } else {
-          TOG_STATUS = !TOG_STATUS;
-        }
-        layer_on(_LAYER_2);
-        update_tri_layer_RGB(_LAYER_1, _LAYER_2, _ADJUST);
-      } else {
-        layer_off(_LAYER_2);
-        TOG_STATUS = false;
-        update_tri_layer_RGB(_LAYER_1, _LAYER_2, _ADJUST);
-      }
-      return false;
-      break;
-    case ADJUST:
-      if (record->event.pressed) {
-        layer_on(_ADJUST);
-      } else {
-        layer_off(_ADJUST);
-      }
-      return false;
-      break;
+	switch (keycode) {
+		// 追加したコード {{{
+		case QWERTY:
+			if (record->event.pressed) {
+				persistent_default_layer_set(1UL<<_QWERTY);
+			}
+			return false;
+			break;
+		case YSTRP:
+			if (record->event.pressed) {
+				persistent_default_layer_set(1UL<<_YSTRP);
+			}
+			return false;
+			break;
+		case L1:
+			if (record->event.pressed) {
+				if (TOG_STATUS) {
+				} else {
+					TOG_STATUS = !TOG_STATUS;
+				}
+				layer_on(_LAYER_1);
+				update_tri_layer_RGB(_LAYER_1, _LAYER_2, _ADJUST);
+			} else {
+				TOG_STATUS = false;
+				layer_off(_LAYER_1);
+				update_tri_layer_RGB(_LAYER_1, _LAYER_2, _ADJUST);
+			}
+			return false;
+		case L2:
+			if (record->event.pressed) {
+				if (TOG_STATUS) {
+				} else {
+					TOG_STATUS = !TOG_STATUS;
+				}
+				layer_on(_LAYER_2);
+				update_tri_layer_RGB(_LAYER_1, _LAYER_2, _ADJUST);
+			} else {
+				layer_off(_LAYER_2);
+				TOG_STATUS = false;
+				update_tri_layer_RGB(_LAYER_1, _LAYER_2, _ADJUST);
+			}
+			return false;
+		case L3: if (record->event.pressed) { layer_on(_LAYER_3); } else { layer_off(_LAYER_3); } return false;
+		case L4:
+					 if (record->event.pressed) { layer_on(_LAYER_4); } else { layer_off(_LAYER_4); } return false;
+		case ADJUST: if (record->event.pressed) { layer_on(_ADJUST); } else { layer_off(_ADJUST); } return false;
 //    case SYMBOL:
 //      if (record->event.pressed) {
 //        layer_on(_SYMBOL);
